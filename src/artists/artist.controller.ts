@@ -1,10 +1,20 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, ParseUUIDPipe, Post, Put } from "@nestjs/common";
-import { ArtistService } from "./artist.service";
-import { CreateArtistDto } from "./Dtos/createArtist.dto";
-import { UpdateArtistDto } from "./Dtos/updateArtist.dto";
-import { ArtistEntity } from "./entities/artistEntity";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { ArtistService } from './artist.service';
+import { CreateArtistDto } from './Dtos/createArtist.dto';
+import { UpdateArtistDto } from './Dtos/updateArtist.dto';
+import { ArtistEntity } from './entities/artistEntity';
 
-@Controller('track')
+@Controller('artist')
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
 
