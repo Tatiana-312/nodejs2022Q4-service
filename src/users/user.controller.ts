@@ -1,7 +1,17 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/users/Dtos/createUser.dto';
 import { UpdatePasswordDto } from 'src/users/Dtos/updatePassword.dto';
-import { User } from 'src/users/interfaces/user.interface';
+import { UserEntity } from 'src/users/entities/userEntity';
 import { UserService } from 'src/users/user.service';
 
 @Controller('user')
@@ -11,27 +21,31 @@ export class UserController {
   @Post()
   @HttpCode(201)
   async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return new UserEntity(this.userService.create(createUserDto));
   }
 
   @Get()
-  async findAll(): Promise<User[]>{
-    return this.userService.findAll();
+  async findAll(): Promise<UserEntity[]> {
+    const users = this.userService.findAll();
+    return users.map((user) => new UserEntity(user));
   }
 
   @Get(':userId')
-  findOne(@Param('userId') id: string) {
-    return this.userService.findOne();
+  async findOne(@Param('userId', ParseUUIDPipe) id: string) {
+    return new UserEntity(this.userService.findOne(id));
   }
 
   @Put(':userId')
-  update(@Param('userId') id: string, @Body() updatePasswordDto: UpdatePasswordDto) {
-    return this.userService.update();
+  async update(
+    @Param('userId', ParseUUIDPipe) id: string,
+    @Body() updatePasswordDto: UpdatePasswordDto,
+  ) {
+    return new UserEntity(this.userService.update(id, updatePasswordDto));
   }
 
   @Delete(':userId')
   @HttpCode(204)
-  remove(@Param('userId') id: string) {
-    return this.userService.remove();
+  async remove(@Param('userId', ParseUUIDPipe) id: string) {
+    return this.userService.remove(id);
   }
-};
+}
