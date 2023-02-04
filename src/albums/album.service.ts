@@ -54,6 +54,13 @@ export class AlbumService {
       if (track) {
         track.albumId = null;
       }
+
+      const albumInFav = this.db.favs.albums.includes(id);
+      if (albumInFav) {
+        this.db.favs.albums = this.db.favs.albums.filter(
+          (albumId) => albumId !== id,
+        );
+      }
     }
   }
 }

@@ -53,6 +53,13 @@ export class ArtistService {
       if (track) {
         track.artistId = null;
       }
+
+      const artistInFav = this.db.favs.artists.includes(id);
+      if (artistInFav) {
+        this.db.favs.artists = this.db.favs.artists.filter(
+          (artistId) => artistId !== id,
+        );
+      }
     }
   }
 }

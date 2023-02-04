@@ -33,12 +33,12 @@ export class TrackService {
     throw new NotFoundException();
   }
 
-  update(id: string, updateTrackdDto: UpdateTrackDto) {
+  update(id: string, updateTrackDto: UpdateTrackDto) {
     const track = this.findOne(id);
-    track.name = updateTrackdDto.name;
-    track.artistId = updateTrackdDto.artistId;
-    track.albumId = updateTrackdDto.albumId;
-    track.duration = updateTrackdDto.duration;
+    track.name = updateTrackDto.name;
+    track.artistId = updateTrackDto.artistId;
+    track.albumId = updateTrackDto.albumId;
+    track.duration = updateTrackDto.duration;
     return track;
   }
 
@@ -48,6 +48,13 @@ export class TrackService {
       this.db.tracks = this.db.tracks.filter(
         (track: TrackEntity) => track.id !== id,
       );
+
+      const trackInFav = this.db.favs.tracks.includes(id);
+      if (trackInFav) {
+        this.db.favs.tracks = this.db.favs.tracks.filter(
+          (trackId) => trackId !== id,
+        );
+      }
     }
   }
 }
