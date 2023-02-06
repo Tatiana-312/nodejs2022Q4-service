@@ -8,7 +8,13 @@
 ## Downloading
 
 ```
-git clone {repository URL}
+git clone https://github.com/Tatiana-312/nodejs2022Q4-service.git
+```
+```
+cd nodejs2022Q4-service
+```
+```
+git checkout rest-service
 ```
 
 ## Installing NPM modules
@@ -17,15 +23,30 @@ git clone {repository URL}
 npm install
 ```
 
+## Get PORT
+Copy `.env.example` file and rename copy to `.env`
 ## Running application
 
 ```
 npm start
 ```
-
+## OpenAPI
 After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+in your browser OpenAPI by typing https://editor.swagger.io/.
+
+Then copy all text from `api.yaml` file, which in `doc` folder and past it in Swagger Editor.
+
+After that, on the right side of the screen, you can see a `Home Library Service`.
+
+Now, you can check how It works here.
+
+![image](https://user-images.githubusercontent.com/84280280/217025876-791bb013-7150-4b05-a28f-b938c6d9fa33.png)
+
+Choose method that you want, press 
+
+![image](https://user-images.githubusercontent.com/84280280/217026768-c963c363-8a6b-464e-96de-a64c6ffd1454.png)  button 
+
+and use it.
 
 ## Testing
 
@@ -37,36 +58,9 @@ To run all tests without authorization
 npm run test
 ```
 
-To run only one of all test suites
-
-```
-npm run test -- <path to suite>
-```
-
-To run all test with authorization
-
-```
-npm run test:auth
-```
-
-To run only specific test suite with authorization
-
-```
-npm run test:auth -- <path to suite>
-```
-
 ### Auto-fix and format
 
 ```
 npm run lint
 ```
 
-```
-npm run format
-```
-
-### Debugging in VSCode
-
-Press <kbd>F5</kbd> to debug.
-
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
